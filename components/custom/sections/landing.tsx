@@ -7,7 +7,7 @@ const LandingSection = () => {
   // Use `useScroll` to track the scroll progress
   const { scrollY, scrollYProgress } = useScroll();
   const yTransform = useTransform(scrollY, (value) => value);
-  const opacityTransform = useTransform(scrollYProgress, [0.1, 0.3], [1, 0]); // Fades out near the end
+  const opacityTransform = useTransform(scrollYProgress, [0.01, 0.05], [1, 0]); // Fades out near the end
 
   return (
     <div
@@ -19,7 +19,7 @@ const LandingSection = () => {
       }}
     >
       {/* Backdrop blur with a parallax effect */}
-      <motion.div className="w-full h-screen backdrop-blur-sm flex flex-col justify-center items-center py-12 relative">
+      <motion.div className=" w-full h-screen backdrop-blur-sm flex flex-col justify-center items-center py-12 relative">
         <motion.div
           className="container flex flex-col justify-center items-center"
           style={{
@@ -30,10 +30,10 @@ const LandingSection = () => {
           animate={{ opacity: 1, y: 0 }} // Target animation state
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
-          <h1 className="capitalize text-6xl font-semibold w-3/4 text-center">
+          <h1 className="capitalize text-3xl md:text-6xl font-semibold w-3/4 text-center">
             Transforming possibilities into digital realities.
           </h1>
-          <h1 className="capitalize text-4xl font-semibold w-2/3 text-center pt-8">
+          <h1 className="capitalize text-2xl md:text-4xl font-semibold w-2/3 text-center pt-8">
             Vishwa Prasad L
           </h1>
         </motion.div>
