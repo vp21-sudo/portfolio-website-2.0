@@ -1,5 +1,5 @@
 "use client";
-import { Home, Kanban, Phone, Menu, X } from "lucide-react";
+import { Home, Kanban, Phone, Menu, X, SquareTerminal } from "lucide-react";
 import { useScroll } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,7 +44,7 @@ const TopNav = () => {
               width={60}
               height={50}
               className={
-                (!fullNav ? "w-8" : "w-18") + " hidden md:flex rounded-full"
+                (!fullNav ? "w-0" : "w-18") + " hidden md:flex rounded-full"
               }
             />
           </Link>
@@ -62,7 +62,7 @@ const TopNav = () => {
           {/* Desktop Links */}
           <div className="hidden md:flex w-2/3 justify-end items-center gap-10">
             <Link
-              href={"/home"}
+              href={"#home"}
               className="group flex justify-center items-center gap-2 text-xl transition-transform duration-100"
             >
               <Home
@@ -75,7 +75,7 @@ const TopNav = () => {
               </span>
             </Link>
             <Link
-              href={"/projects"}
+              href={"#projects"}
               className="group flex justify-center items-center gap-2 text-xl transition-transform duration-100"
             >
               <Kanban
@@ -88,7 +88,20 @@ const TopNav = () => {
               </span>
             </Link>
             <Link
-              href={"/contact"}
+              href={"#about"}
+              className="group flex justify-center items-center gap-2 text-xl transition-transform duration-300"
+            >
+              <SquareTerminal
+                size={18}
+                className="group-hover:scale-125 group-hover:text-fuchsia-400 transition-transform duration-200"
+              />
+              <span className="relative group-hover:text-fuchsia-400 font-bold flex">
+                About
+                <span className="absolute bottom-0 w-0 h-[0.1rem] bg-fuchsia-500 group-hover:w-full transition-all ease-in-out duration-200"></span>
+              </span>
+            </Link>
+            <Link
+              href={"#contact"}
               className="group flex justify-center items-center gap-2 text-xl transition-transform duration-300"
             >
               <Phone
@@ -119,12 +132,12 @@ const TopNav = () => {
               alt="logo"
               width={40}
               height={40}
-              className="rounded-full mb-6   "
+              className="rounded-full mb-6"
               onClick={() => setIsMobileMenuOpen(false)}
             />
-            <nav className=" relative flex items-center flex-col gap-6">
+            <nav className="relative flex items-center flex-col gap-6">
               <Link
-                href={"/home"}
+                href={"#home"}
                 className="flex items-center gap-2 text-xl mt-4"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -132,7 +145,7 @@ const TopNav = () => {
                 Home
               </Link>
               <Link
-                href={"/projects"}
+                href={"#projects"}
                 className="flex items-center gap-2 text-xl"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -140,7 +153,15 @@ const TopNav = () => {
                 Projects
               </Link>
               <Link
-                href={"/contact"}
+                href={"#about"}
+                className="flex items-center gap-2 text-xl"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <SquareTerminal size={20} />
+                About
+              </Link>
+              <Link
+                href={"#contact"}
                 className="flex items-center gap-2 text-xl"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

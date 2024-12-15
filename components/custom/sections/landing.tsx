@@ -11,6 +11,7 @@ const LandingSection = () => {
 
   return (
     <div
+      id="home"
       className={`${popins.className} w-full h-screen flex flex-col justify-center items-center text-stone-50`}
       style={{
         backgroundImage: "url('/bg1.jpg')",

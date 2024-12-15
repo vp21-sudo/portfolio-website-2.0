@@ -16,7 +16,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "VP | sudo",
-  description: "A portpolio website",
+  description:
+    "Transforming possibilities into digital realities. Explore my portfolio showcasing innovative projects, skills, and experiences in web development, software engineering, and modern technologies.",
 };
 
 export default function RootLayout({

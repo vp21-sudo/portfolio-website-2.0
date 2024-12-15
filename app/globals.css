@@ -92,3 +92,7 @@
     animation: scroll-rev 10s linear infinite;
     display: inline-flex;
 }
+
+html {
+    scroll-behavior: smooth;
+}
