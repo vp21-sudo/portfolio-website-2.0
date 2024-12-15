@@ -29,7 +29,7 @@ const LandingSection = () => {
           }}
           initial={{ opacity: 0, y: 50 }} // Initial animation state (off-screen and transparent)
           animate={{ opacity: 1, y: 0 }} // Target animation state
-          transition={{ duration: 3, ease: "easeInOut" }}
+          transition={{ duration: 2, ease: "easeInOut" }}
         >
           <h1 className="capitalize text-3xl md:text-6xl font-semibold w-3/4 text-center">
             Transforming possibilities into digital realities.

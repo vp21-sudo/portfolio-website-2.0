@@ -35,7 +35,7 @@ const TopNav = () => {
           }`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 2, ease: "easeInOut" }}
         >
           <Link href={"/"}>
             <Image
