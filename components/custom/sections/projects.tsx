@@ -61,7 +61,7 @@ const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
   const { title, description, image, github, demo, techs } = project;
 
   return (
-    <div className="flex flex-col bg-slate-800 rounded-lg border-2 gap-2   border-slate-500 p-8 shadow-slate-200 shadow-sm hover:shadow-slate-100 hover:shadow-lg transition-shadow duration-300">
+    <div className="flex flex-col bg-slate-800 rounded-lg border-2 gap-2   border-slate-500 p-8 shadow-slate-200 shadow-sm  transition-shadow duration-300">
       {/* Title */}
       <h2 className="text-white text-2xl font-bold mb-2">{title}</h2>
 
@@ -96,13 +96,13 @@ const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-3 mt-auto">
+      <div className="flex gap-3 mt-auto z-40">
         {github && (
           <a
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-2 rounded font-bold"
+            className="bg-blue-700 hover:bg-blue-600 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold"
           >
             GitHub
           </a>
@@ -112,7 +112,7 @@ const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
             href={demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-600 hover:bg-green-700 text-white text-sm px-3 py-2 rounded font-bold"
+            className="bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold"
           >
             Live Demo
           </a>
@@ -130,7 +130,7 @@ const ProjectsSection: React.FC = () => {
     >
       <h1 className="text-white text-4xl font-bold mt-12 mb-12">Projects</h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
         {projects.map((project, index) => (
           <ProjectGrid key={index} project={project} />
         ))}

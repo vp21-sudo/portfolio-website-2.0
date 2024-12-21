@@ -7,17 +7,17 @@ const LandingSection = () => {
   // Use `useScroll` to track the scroll progress
   const { scrollY, scrollYProgress } = useScroll();
   const yTransform = useTransform(scrollY, (value) => value);
-  const opacityTransform = useTransform(scrollYProgress, [0.01, 0.05], [1, 0]); // Fades out near the end
+  const opacityTransform = useTransform(scrollYProgress, [0.01, 0.15], [1, 0]); // Fades out near the end
 
   return (
     <div
       id="home"
       className={`${popins.className} w-full h-screen flex flex-col justify-center items-center text-stone-50`}
-      style={{
-        backgroundImage: "url('/bg1.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      // style={{
+      //   backgroundImage: "url('/bg1.jpg')",
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      // }}
     >
       {/* Backdrop blur with a parallax effect */}
       <motion.div className=" w-full h-screen backdrop-blur-sm flex flex-col justify-center items-center py-12 relative">
