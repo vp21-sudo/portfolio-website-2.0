@@ -4,10 +4,10 @@ const Contact = () => {
   return (
     <div
       id="contact"
-      className=" px-12 flex flex-col justify-center items-center py-20 bg-slate-950 text-slate-50"
+      className="px-12 flex z-30 flex-col justify-center items-center py-20 bg-slate-100 dark:bg-slate-950 text-slate-950 dark:text-slate-50"
     >
       <h2 className="text-4xl font-bold mb-6 text-center">Contact Me</h2>
-      <p className="text-lg text-gray-300 mb-8 text-center">
+      <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 text-center">
         Feel free to reach out via email or connect with me on social media!
       </p>
 
@@ -17,7 +17,7 @@ const Contact = () => {
           <Mail size={20} />
           <a
             href="mailto:vishwaprasad11@gmail.com"
-            className="text-lg hover:text-fuchsia-400 transition-colors"
+            className="text-lg hover:text-teal-400 dark:hover:text-yellow-300 transition-colors"
           >
             vishwaprasad11@gmail.com
           </a>
@@ -30,7 +30,7 @@ const Contact = () => {
           href="https://github.com/vp21-sudo"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-fuchsia-400 transition-transform hover:scale-110"
+          className="hover:text-teal-400 dark:hover:text-yellow-300 transition-transform hover:scale-110"
         >
           <Github size={30} />
         </a>
@@ -38,7 +38,7 @@ const Contact = () => {
           href="https://www.linkedin.com/in/sudovp"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-fuchsia-400 transition-transform hover:scale-110"
+          className="hover:text-teal-400 dark:hover:text-yellow-300 transition-transform hover:scale-110"
         >
           <Linkedin size={30} />
         </a>
@@ -46,7 +46,7 @@ const Contact = () => {
           href="https://www.instagram.com/vishwa_prasad_1/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-fuchsia-400 transition-transform hover:scale-110"
+          className="hover:text-teal-400 dark:hover:text-yellow-300 transition-transform hover:scale-110"
         >
           <Instagram size={30} />
         </a>

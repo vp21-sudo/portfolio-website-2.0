@@ -31,17 +31,17 @@ const ScrollingSection = () => {
     <div
       className={
         popins.className +
-        " h-20 md:h-32 bg-slate-800 flex flex-col gap-2 text-4xl md:text-6xl justify-center items-center w-full overflow-hidden"
+        " h-20 md:h-32 bg-slate-300 dark:bg-slate-800 flex flex-col gap-2 text-4xl md:text-6xl justify-center items-center w-full overflow-hidden"
       }
     >
-      <div className="w-full flex text-slate-50 font-bold gap-10 animate-scroll">
+      <div className="w-full flex text-slate-950 dark:text-slate-50 font-bold gap-10 animate-scroll">
         {techs.map((value, index) => (
           <p key={index} className="whitespace-nowrap">
             {value}
           </p>
         ))}
       </div>
-      <div className="w-full flex text-slate-50 font-bold gap-10 animate-scroll-rev">
+      <div className="w-full flex text-slate-950 dark:text-slate-50 font-bold gap-10 animate-scroll-rev">
         {techs
           .slice()
           .reverse()

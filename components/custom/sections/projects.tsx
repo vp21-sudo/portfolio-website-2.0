@@ -61,9 +61,11 @@ const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
   const { title, description, image, github, demo, techs } = project;
 
   return (
-    <div className="flex flex-col bg-slate-800 rounded-lg border-2 gap-2   border-slate-500 p-8 shadow-slate-200 shadow-sm  transition-shadow duration-300">
+    <div className="flex flex-col dark:bg-slate-800 rounded-lg border-2 gap-2   border-slate-500 p-8 shadow-slate-200 shadow-sm  transition-shadow duration-300">
       {/* Title */}
-      <h2 className="text-white text-2xl font-bold mb-2">{title}</h2>
+      <h2 className="text-slate-950 dark:text-slate-50 text-2xl font-bold mb-2">
+        {title}
+      </h2>
 
       {/* Image */}
       {image && (
@@ -79,7 +81,7 @@ const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
       )}
 
       {/* Description */}
-      <p className="text-slate-200 z-10 text-md md:text-lg md:py-8 mb-4 line-clamp-6">
+      <p className="text-slate-500 dark:text-slate-200 z-10 text-md md:text-lg md:py-8 mb-2 line-clamp-4">
         {description}
       </p>
 
@@ -88,7 +90,7 @@ const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
         {techs.map((tech, index) => (
           <span
             key={index}
-            className="bg-slate-700 text-xs md:text-sm text-white px-2 py-1 rounded"
+            className=" bg-slate-200 dark:bg-slate-700 text-xs md:text-sm text-slate-700 dark:text-slate-50 px-2 py-1 rounded"
           >
             {tech}
           </span>
@@ -96,7 +98,7 @@ const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-3 mt-auto z-40">
+      <div className="flex gap-3 mt-auto z-30">
         {github && (
           <a
             href={github}
@@ -126,9 +128,11 @@ const ProjectsSection: React.FC = () => {
   return (
     <div
       id="projects"
-      className={`${popins.className} min-h-screen bg-slate-950 px-4 py-12 md:px-16 lg:px-32`}
+      className={`${popins.className} min-h-screen bg-slate-100 dark:bg-slate-950 px-4 py-12 md:px-16 lg:px-32`}
     >
-      <h1 className="text-white text-4xl font-bold mt-12 mb-12">Projects</h1>
+      <h1 className="dark:text-slate-50 text-slate-950 text-4xl font-bold mt-12 mb-12">
+        Projects
+      </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
         {projects.map((project, index) => (

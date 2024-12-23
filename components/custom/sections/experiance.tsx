@@ -2,20 +2,22 @@ const Exp = () => {
   return (
     <div
       id="about"
-      className="flex flex-col justify-center items-center px-8 md:px-32 pt-10 md:pt-20"
+      className=" flex flex-col justify-center items-center px-8 md:px-32 pt-10 md:pt-20"
     >
-      <h2 className="text-slate-50 text-2xl w-full font-bold mb-4">
+      <h2 className=" text-slate-950  dark:text-slate-50 text-2xl w-full font-bold mb-4">
         Work Experience
       </h2>
 
       {/* Software Engineer - TicketsQue */}
-      <div className="w-full md:w-2/3 flex flex-col justify-center items-start py-6 text-slate-50 rounded-lg">
+      <div className="w-full md:w-2/3 flex flex-col justify-center items-start py-6 text-slate-950  dark:text-slate-50 rounded-lg">
         <div className="text-md md:text-lg">
           <h3 className="text-lg md:text-2xl font-semibold">
             Software Engineer - TicketsQue Solutions Pvt Ltd
           </h3>
-          <p className="text-gray-400 text-sm md:text-lg">Oct 2023 - Present</p>
-          <ul className="list-disc ml-5 text-gray-300 text-lg md:text-xl">
+          <p className=" text-gray-800 dark:text-gray-400 text-sm md:text-lg">
+            Oct 2023 - Present
+          </p>
+          <ul className="list-disc ml-5 text-gray-600 dark:text-gray-300 text-lg md:text-xl">
             <li>
               Worked on <strong>EKS Kubernetes</strong> to maintain and deploy a{" "}
               <strong>microservices architecture</strong>, ensuring high
@@ -48,15 +50,15 @@ const Exp = () => {
       </div>
 
       {/* Application Development Intern - Ezy Click */}
-      <div className="w-full md:w-2/3 flex flex-col justify-center items-start py-6 text-slate-50 rounded-lg">
+      <div className="w-full md:w-2/3 flex flex-col justify-center items-start py-6 text-slate-950  dark:text-slate-50 rounded-lg">
         <div className="text-md md:text-lg">
           <h3 className="text-lg md:text-2xl font-semibold">
             Application Development Intern - Ezy Click Pvt Ltd
           </h3>
-          <p className="text-gray-400 text-sm md:text-lg">
+          <p className="text-gray-800 dark:text-gray-400 text-sm md:text-lg">
             Feb 2023 - Oct 2023
           </p>
-          <ul className="list-disc ml-5 text-gray-300 text-lg md:text-xl">
+          <ul className="list-disc ml-5 text-gray-600 dark:text-gray-300 text-lg md:text-xl">
             <li>
               Built a pre-release promotional website using{" "}
               <strong>Next.js</strong> for an upcoming product launch.
