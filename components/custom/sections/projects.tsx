@@ -1,5 +1,6 @@
 import { Poppins } from "next/font/google";
 import Image from "next/image";
+import { useState } from "react";
 
 // Define font
 const popins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
@@ -16,6 +17,16 @@ interface ProjectType {
 
 // Project data
 const projects: ProjectType[] = [
+  {
+    title: "𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀 𝗠𝗲𝘁𝗿𝗶𝗰𝘀 𝗗𝗮𝘀𝗵𝗯𝗼𝗮𝗿𝗱",
+    description:
+      "This Kubernetes Metrics Dashboard combines a real-time visualization of CPU and memory usage for nodes and pods with a clean, table-based UI. Built using Next.js, it integrates the Kubernetes Metrics Server and leverages the App Router for seamless backend and frontend communication. In addition to detailed metrics, the dashboard also features ShadCN UI charts for enhanced visual representation, providing an intuitive and user-friendly way to monitor cluster performance at a glance.",
+    image:
+      "https://sthreepublicproject.s3.ap-south-1.amazonaws.com/k8s-metrics-viewer-updated.png",
+    github: "https://github.com/vp21-sudo/k8s-metrics-dashboard",
+    demo: "",
+    techs: ["Kubernetes", "DevOps", "Data visualization", "NextJS", "ShadcnUI"],
+  },
   {
     title: "LogViewer",
     description:
@@ -57,7 +68,10 @@ const projects: ProjectType[] = [
   },
 ];
 
-const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
+const ProjectGrid: React.FC<{
+  project: ProjectType;
+  onImageClick: (image: string, title: string) => void;
+}> = ({ project, onImageClick }) => {
   const { title, description, image, github, demo, techs } = project;
 
   return (
@@ -69,7 +83,10 @@ const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
 
       {/* Image */}
       {image && (
-        <div className="w-full h-40 mb-4 relative">
+        <div
+          className={"w-full h-40 mb-4 relative " + image && " cursor-pointer"}
+          onClick={() => onImageClick(image, title)}
+        >
           <Image
             src={image}
             alt={`${title} image`}
@@ -125,6 +142,21 @@ const ProjectGrid: React.FC<{ project: ProjectType }> = ({ project }) => {
 };
 
 const ProjectsSection: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState<string | null>(null);
+  const [modalTitle, setModalTitle] = useState<string | null>(null);
+
+  const handleImageClick = (image: string, title: string) => {
+    setModalImage(image);
+    setModalTitle(title);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setModalImage(null);
+    setModalTitle(null);
+  };
   return (
     <div
       id="projects"
@@ -136,9 +168,43 @@ const ProjectsSection: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
         {projects.map((project, index) => (
-          <ProjectGrid key={index} project={project} />
+          <ProjectGrid
+            key={index}
+            project={project}
+            onImageClick={handleImageClick}
+          />
         ))}
       </div>
+      {/* Modal */}
+      {isModalOpen && modalImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+          onClick={handleCloseModal}
+        >
+          <div
+            className="relative w-10/12 md:w-4/5 lg:w-3/4 xl:w-2/3 bg-white dark:bg-slate-800 rounded-lg p-6"
+            onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside
+          >
+            <button
+              onClick={handleCloseModal}
+              className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 text-xl font-bold"
+            >
+              &times;
+            </button>
+            <h2 className="text-center text-2xl font-bold text-slate-800 dark:text-slate-50 mb-6">
+              {modalTitle}
+            </h2>
+            <div className="w-full h-[20vh] md:h-[70vh] relative">
+              <Image
+                src={modalImage}
+                alt={modalTitle || "Modal Image"}
+                layout="fill"
+                className="object-contain rounded-lg"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
