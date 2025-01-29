@@ -1,7 +1,7 @@
 const Edu = () => {
   return (
     <div className="flex flex-col justify-center items-center px-8 md:px-32 py-5 md:py-10">
-      <h2 className="text-slate-50 text-2xl w-full font-bold mb-4">
+      <h2 className="text-slate-950 dark:text-slate-50 text-2xl w-full font-bold mb-4">
         Education
       </h2>
       {/* Master of Computer Applications */}

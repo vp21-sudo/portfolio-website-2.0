@@ -96,3 +96,21 @@
 html {
     scroll-behavior: smooth;
 }
+
+/* Thin scrollbar */
+::-webkit-scrollbar {
+    width: 6px; /* Thin width */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* Scrollbar color */
+    border-radius: 10px; /* Round edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Darker on hover */
+}

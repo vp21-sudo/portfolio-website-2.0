@@ -1,4 +1,5 @@
 "use client";
+import ChatSection from "@/components/custom/sections/chat";
 import Contact from "@/components/custom/sections/contact";
 import Edu from "@/components/custom/sections/education";
 // import AboutSection from "@/components/custom/sections/about";
@@ -11,6 +12,7 @@ import ScrollingSection from "@/components/custom/sections/scrolling";
 const Page = () => {
   return (
     <>
+      <ChatSection />
       <LandingSection />
       <ScrollingSection />
       <ProjectsSection />
