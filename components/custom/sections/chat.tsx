@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ChevronUp } from "lucide-react";
+import { MessageSquare, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const ChatSection = () => {
@@ -67,29 +67,32 @@ const ChatSection = () => {
 
   return (
     <div
-      className={`fixed bottom-20 right-5 md:right-10 w-full max-w-[90%] md:max-w-[350px] dark:bg-gray-900 bg-slate-100 dark:text-gray-200 text-gray-900 shadow-lg rounded-lg transition-all ease-in-out duration-300 z-50 ${
-        open ? "h-96" : "h-14"
+      className={`  fixed bottom-20 right-5 md:right-20 w-14 dark:bg-gray-700 bg-slate-100 dark:text-gray-200 text-gray-900 shadow-lg transition-all ease-in-out duration-200 z-30 ${
+        open
+          ? " h-[70vh] md:h-96 w-[90vw] md:w-72 rounded-lg bottom-40 md:bottom-20"
+          : "h-14 rounded-full"
       }`}
     >
       {/* Toggle Button */}
       <Button
-        className="p-3 w-full h-14 rounded-none font-bold text-xl hover:cursor-pointer flex justify-between items-center bg-gray-100 dark:bg-gray-800"
+        className={`p-3 w-full border-b border-2 border-slate-200 h-14 font-bold text-xl  hover:cursor-pointer flex justify-center items-center bg-gray-100 dark:bg-gray-700 ${open ? " justify-end rounded-sm border-0" : " rounded-full"}`}
         variant={"secondary"}
         onClick={() => setOpen(!open)}
       >
-        Chat
-        <ChevronUp
-          className={`transition-transform duration-200 ${
-            open ? "-rotate-180" : "rotate-0"
-          }`}
-        />
+        {!open ? (
+          <MessageSquare size={48} />
+        ) : (
+          <span className=" w-full  flex justify-between items-center">
+            Chat <X size={48} />
+          </span>
+        )}
       </Button>
 
       {/* Chat Content */}
       {open && (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full text-lg ">
           {/* Messages Container */}
-          <div className="flex-1 p-2 overflow-y-auto flex flex-col gap-2">
+          <div className="flex-1 p-2 overflow-y-auto flex flex-col gap-2 will-change-transform">
             {messages.length === 0 ? (
               <p className="text-center text-gray-500 dark:text-gray-400">
                 Start a conversation...
@@ -100,8 +103,8 @@ const ChatSection = () => {
                   key={idx}
                   className={`p-2 rounded-lg max-w-[75%] ${
                     msg.role === "user"
-                      ? "bg-blue-500 text-white self-end"
-                      : "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-white self-start"
+                      ? " bg-gray-300 dark:bg-gray-900  text-gray-900 dark:text-white self-end"
+                      : " bg-blue-300 dark:bg-blue-900 text-slate-950 dark:text-slate-50  self-start"
                   }`}
                 >
                   {msg.content}
@@ -117,10 +120,10 @@ const ChatSection = () => {
           </div>
 
           {/* Input Field (Fixed at Bottom) */}
-          <div className="p-2 border-t flex items-center gap-2 bg-gray-300 dark:bg-gray-800">
+          <div className="p-2 border-t flex items-center gap-2 bg-gray-300 dark:bg-gray-800 ">
             <Input
               type="text"
-              className="flex-1 p-2 border rounded-lg text-sm dark:bg-gray-700 bg-white text-gray-900 dark:text-white"
+              className="flex-1 p-2 border rounded-lg text-lg font-semibold dark:bg-gray-700 bg-white text-gray-900 dark:text-white"
               placeholder="Type a message..."
               value={input}
               maxLength={50}
