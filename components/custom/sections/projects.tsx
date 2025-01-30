@@ -115,7 +115,7 @@ const ProjectGrid: React.FC<{
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-3 mt-auto z-30">
+      <div className="flex gap-3 mt-auto z-20">
         {github && (
           <a
             href={github}

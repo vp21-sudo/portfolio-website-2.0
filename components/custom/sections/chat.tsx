@@ -67,15 +67,15 @@ const ChatSection = () => {
 
   return (
     <div
-      className={`  fixed bottom-20 right-5 md:right-20 w-14 dark:bg-gray-700 bg-slate-100 dark:text-gray-200 text-gray-900 shadow-lg transition-all ease-in-out duration-200 z-30 ${
+      className={`  fixed  w-14 dark:bg-slate-950 bg-slate-100 dark:text-gray-200 text-gray-900 shadow-lg transition-all ease-in-out duration-200 z-30 ${
         open
-          ? " h-[70vh] md:h-96 w-[90vw] md:w-72 rounded-lg bottom-40 md:bottom-20"
-          : "h-14 rounded-full"
+          ? " h-[70vh] md:h-96 w-[90vw] md:w-72 rounded-lg rounded-b-none right-5 md:right-20 bottom-24 md:bottom-20"
+          : "h-14 rounded-full right-3 bottom-10 md:bottom-10 md:right-16 "
       }`}
     >
       {/* Toggle Button */}
       <Button
-        className={`p-3 w-full border-b border-2 border-slate-200 h-14 font-bold text-xl  hover:cursor-pointer flex justify-center items-center bg-gray-100 dark:bg-gray-700 ${open ? " justify-end rounded-sm border-0" : " rounded-full"}`}
+        className={`p-3 w-full border-b border-2 border-slate-200 h-14 font-bold text-xl  hover:cursor-pointer flex justify-center items-center hover:bg-blue-200 bg-blue-200 dark:bg-blue-800 ${open ? " justify-end rounded-sm border-0" : " rounded-full"}`}
         variant={"secondary"}
         onClick={() => setOpen(!open)}
       >
@@ -90,7 +90,7 @@ const ChatSection = () => {
 
       {/* Chat Content */}
       {open && (
-        <div className="flex flex-col h-full text-lg ">
+        <div className="flex flex-col h-full text-md md:text-lg ">
           {/* Messages Container */}
           <div className="flex-1 p-2 overflow-y-auto flex flex-col gap-2 will-change-transform">
             {messages.length === 0 ? (
@@ -101,9 +101,9 @@ const ChatSection = () => {
               messages.map((msg, idx) => (
                 <div
                   key={idx}
-                  className={`p-2 rounded-lg max-w-[75%] ${
+                  className={`p-2 rounded-lg  max-w-[75%] ${
                     msg.role === "user"
-                      ? " bg-gray-300 dark:bg-gray-900  text-gray-900 dark:text-white self-end"
+                      ? " bg-gray-300 dark:bg-cyan-700  text-gray-900 dark:text-white self-end"
                       : " bg-blue-300 dark:bg-blue-900 text-slate-950 dark:text-slate-50  self-start"
                   }`}
                 >
@@ -120,10 +120,10 @@ const ChatSection = () => {
           </div>
 
           {/* Input Field (Fixed at Bottom) */}
-          <div className="p-2 border-t flex items-center gap-2 bg-gray-300 dark:bg-gray-800 ">
+          <div className="p-2 border-t flex items-center gap-2 bg-blue-300 dark:bg-blue-900 ">
             <Input
               type="text"
-              className="flex-1 p-2 border rounded-lg text-lg font-semibold dark:bg-gray-700 bg-white text-gray-900 dark:text-white"
+              className="flex-1 p-2 w-4/5 border rounded-lg text-md md:text-lg dark:bg-slate-950 bg-white text-gray-900 dark:text-slate-100 focus:!border-0 focus:!ring-0"
               placeholder="Type a message..."
               value={input}
               maxLength={50}

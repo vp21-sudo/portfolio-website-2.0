@@ -78,7 +78,7 @@ const TopNav = () => {
           </a>
 
           {/* Menu Toggle for Mobile */}
-          <div className="md:hidden w-full flex justify-center  bg-transparent items-center ">
+          <div className="md:hidden fixed top-6 border-2 border-slate-300 rounded-lg right-6 pt-1 pl-1 pr-1">
             <button
               className=" bg-transparent "
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
