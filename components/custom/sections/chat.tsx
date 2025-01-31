@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MessageSquare, X } from "lucide-react";
+import { MessagesSquare, SendHorizonal, X } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const ChatSection = () => {
@@ -13,9 +13,16 @@ const ChatSection = () => {
   const [showTyping, setShowTyping] = useState(false);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
 
-  // Auto-scroll to latest message
+  const [isFirstOpen, setIsFirstOpen] = useState(true);
+
+  // Send defauot message and Auto-scroll to latest message
   useEffect(() => {
     if (open) {
+      if (isFirstOpen) {
+        // send default hi to get default response
+        sendMessage("hi", true);
+        setIsFirstOpen(false);
+      }
       chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages, open]);
@@ -31,11 +38,16 @@ const ChatSection = () => {
   }, [loading]);
 
   // Send message
-  const sendMessage = async () => {
-    if (!input.trim() || loading) return;
+  const sendMessage = async (
+    message: string,
+    skipSetMessage: boolean = false,
+  ) => {
+    if (!message.trim() || loading) return;
 
-    const userMessage = { role: "user", content: input };
-    setMessages((prev) => [...prev, userMessage]);
+    const userMessage = { role: "user", content: message };
+    if (!skipSetMessage) {
+      setMessages((prev) => [...prev, userMessage]);
+    }
     setInput("");
     setLoading(true);
 
@@ -45,7 +57,7 @@ const ChatSection = () => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ user_message: input }),
+          body: JSON.stringify({ user_message: message }),
         },
       );
 
@@ -80,10 +92,10 @@ const ChatSection = () => {
         onClick={() => setOpen(!open)}
       >
         {!open ? (
-          <MessageSquare size={48} />
+          <MessagesSquare style={{ width: "28px", height: "28px" }} />
         ) : (
           <span className=" w-full  flex justify-between items-center">
-            Chat <X size={48} />
+            Chat <X style={{ width: "32px", height: "32px" }} />
           </span>
         )}
       </Button>
@@ -93,11 +105,7 @@ const ChatSection = () => {
         <div className="flex flex-col h-full text-md md:text-lg ">
           {/* Messages Container */}
           <div className="flex-1 p-2 overflow-y-auto flex flex-col gap-2 will-change-transform">
-            {messages.length === 0 ? (
-              <p className="text-center text-gray-500 dark:text-gray-400">
-                Start a conversation...
-              </p>
-            ) : (
+            {messages.length > 0 &&
               messages.map((msg, idx) => (
                 <div
                   key={idx}
@@ -109,8 +117,7 @@ const ChatSection = () => {
                 >
                   {msg.content}
                 </div>
-              ))
-            )}
+              ))}
             {showTyping && (
               <div className="p-2 rounded-lg bg-gray-400 text-white self-start animate-pulse">
                 Typing...
@@ -128,14 +135,14 @@ const ChatSection = () => {
               value={input}
               maxLength={50}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage(input)}
             />
             <Button
               variant="ghost"
-              onClick={sendMessage}
+              onClick={() => sendMessage(input)}
               className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
             >
-              Send
+              <SendHorizonal style={{ width: "20px", height: "20px" }} />
             </Button>
           </div>
         </div>
