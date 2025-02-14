@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { TopNav } from "@/components/custom/nav-bar";
 import { ThemeProvider } from "@/context/theme";
+import NavWrapper from "@/components/custom/nav-wraper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,7 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 max-w-screen-sm md:max-w-[100vw] overflow-x-hidden`}
       >
         <ThemeProvider>
-          <TopNav />
+          <NavWrapper />
           <div className=" transition-colors ease-in-out duration-200  w-full min-h-screen bg-slate-100 dark:bg-slate-900">
             {children}
           </div>
