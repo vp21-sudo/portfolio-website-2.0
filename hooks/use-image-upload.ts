@@ -89,8 +89,12 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
         (compressedBase64.length * 3) / 4 / 1024,
       ); // Base64 size to KB
       setCompressedSize(compressedSizeKB);
-    } catch (err) {
-      setError(err.message || "Failed to compress image");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
     } finally {
       setLoading(false);
     }
