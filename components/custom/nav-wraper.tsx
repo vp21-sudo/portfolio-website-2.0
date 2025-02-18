@@ -6,7 +6,8 @@ export default function NavWrapper() {
   const pathname = usePathname();
 
   // Hide navbar only on the privacy page
-  if (pathname === "/privacy") return null;
+  const noNavPaths = ["/privacy", "/image"];
+  if (noNavPaths.includes(pathname)) return null;
 
   return <TopNav />;
 }

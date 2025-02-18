@@ -18,6 +18,16 @@ interface ProjectType {
 // Project data
 const projects: ProjectType[] = [
   {
+    title: "𝗔𝗪𝗦 𝗟𝗮𝗺𝗯𝗱𝗮 𝗜𝗺𝗮𝗴𝗲 𝗖𝗼𝗺𝗽𝗿𝗲𝘀𝘀𝗼𝗿",
+    description:
+      "AWS Lambda Image Compressor is a serverless function designed to efficiently reduce image file sizes while maintaining quality. Built using Node.js, it utilizes Sharp for image processing. Event-driven execution and low-cost scalability, this solution enhances performance for applications that rely on image-heavy content.",
+    image:
+      "https://sthreepublicproject.s3.ap-south-1.amazonaws.com/lambda-image-compressor.png",
+    github: "",
+    demo: "/image",
+    techs: ["AWS Lambda", "Node.js", "Sharp", "Serverless", "Next JS"],
+  },
+  {
     title: "𝗞𝘂𝗯𝗲𝗿𝗻𝗲𝘁𝗲𝘀 𝗠𝗲𝘁𝗿𝗶𝗰𝘀 𝗗𝗮𝘀𝗵𝗯𝗼𝗮𝗿𝗱",
     description:
       "This Kubernetes Metrics Dashboard combines a real-time visualization of CPU and memory usage for nodes and pods with a clean, table-based UI. Built using Next.js, it integrates the Kubernetes Metrics Server and leverages the App Router for seamless backend and frontend communication. In addition to detailed metrics, the dashboard also features ShadCN UI charts for enhanced visual representation, providing an intuitive and user-friendly way to monitor cluster performance at a glance.",
@@ -92,7 +102,7 @@ const ProjectGrid: React.FC<{
             alt={`${title} image`}
             width={800}
             height={800}
-            className="rounded-lg object-contain "
+            className="rounded-lg border-2 border-slate-500 object-contain "
           />
         </div>
       )}
