@@ -1,6 +1,7 @@
 import { DownloadIcon, Github, Radio } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 // Define font
@@ -144,27 +145,25 @@ const ProjectGrid: React.FC<{
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-700 hover:bg-blue-600 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+            className="bg-blue-700 hover:bg-blue-600 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
           >
             <Github />
             GitHub
           </a>
         )}
         {demo && (
-          <a
+          <Link
             href={demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+            className="bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
           >
             <Radio />
             Live Demo
-          </a>
+          </Link>
         )}
         {apk && (
           <a
             href={apk}
-            className="bg-teal-600 hover:bg-teal-500 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+            className="bg-teal-600 hover:bg-teal-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
           >
             <DownloadIcon />
             Download APK
