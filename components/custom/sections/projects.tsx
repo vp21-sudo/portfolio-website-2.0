@@ -1,3 +1,4 @@
+import { DownloadIcon, Github, Radio } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
 import { useState } from "react";
@@ -12,11 +13,22 @@ interface ProjectType {
   image?: string;
   github?: string;
   demo?: string;
+  apk?: string;
   techs: string[];
 }
-
 // Project data
 const projects: ProjectType[] = [
+  {
+    title: "Try This: AI-powered activities tailored to your interests.",
+    description:
+      "Try This is an AI-powered app that suggests activities based on your interests, from creative hobbies to fitness challenges. It curates personalized recommendations to help you break routines and explore new experiences. With a user-friendly interface. Future updates will include enhanced personalization, location-based suggestions, and social features.",
+    image:
+      "https://sthreepublicproject.s3.ap-south-1.amazonaws.com/try_this_app.png",
+    github: "https://github.com/vp21-sudo/try_this",
+    demo: "",
+    apk: "https://sthreepublicproject.s3.ap-south-1.amazonaws.com/apk/try-this-release-v1.0.2.apk",
+    techs: ["Flutter", "Dart", "Gemini Flash 2.0", "GetX"],
+  },
   {
     title: "𝗔𝗪𝗦 𝗟𝗮𝗺𝗯𝗱𝗮 𝗜𝗺𝗮𝗴𝗲 𝗖𝗼𝗺𝗽𝗿𝗲𝘀𝘀𝗼𝗿",
     description:
@@ -65,6 +77,7 @@ const projects: ProjectType[] = [
       "https://sthreepublicproject.s3.ap-south-1.amazonaws.com/1717089801021_task-trek.png",
     github: "https://github.com/vp21-sudo/Task-Trek",
     demo: "",
+    apk: "https://sthreepublicproject.s3.ap-south-1.amazonaws.com/apk/to-do-app-.0.2.1.apk",
     techs: ["Flutter", "Dart", "SQL-Lite"],
   },
   {
@@ -82,7 +95,7 @@ const ProjectGrid: React.FC<{
   project: ProjectType;
   onImageClick: (image: string, title: string) => void;
 }> = ({ project, onImageClick }) => {
-  const { title, description, image, github, demo, techs } = project;
+  const { title, description, image, github, demo, apk, techs } = project;
 
   return (
     <div className="flex flex-col dark:bg-slate-800 rounded-lg border-2 gap-2   border-slate-500 p-8 shadow-slate-200 shadow-sm  transition-shadow duration-300">
@@ -131,8 +144,9 @@ const ProjectGrid: React.FC<{
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-700 hover:bg-blue-600 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold"
+            className="bg-blue-700 hover:bg-blue-600 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
           >
+            <Github />
             GitHub
           </a>
         )}
@@ -141,9 +155,19 @@ const ProjectGrid: React.FC<{
             href={demo}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold"
+            className="bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
           >
+            <Radio />
             Live Demo
+          </a>
+        )}
+        {apk && (
+          <a
+            href={apk}
+            className="bg-teal-600 hover:bg-teal-500 transition-all ease-in-out duration-200 text-white text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+          >
+            <DownloadIcon />
+            Download APK
           </a>
         )}
       </div>
