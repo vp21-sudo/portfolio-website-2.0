@@ -10,7 +10,7 @@ const LandingSection = () => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (progress) => {
-      const isVisible = progress > 0.1; // Calculate the visibility state
+      const isVisible = progress > 0.05; // Calculate the visibility state
       setVisible(isVisible); // Update state
     });
 

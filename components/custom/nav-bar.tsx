@@ -24,7 +24,7 @@ const TopNav = () => {
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (progress) => {
-      setFullNav(progress > 0.18);
+      setFullNav(progress > 0.12);
     });
 
     return () => unsubscribe();

@@ -166,7 +166,7 @@ const ProjectGrid: React.FC<{
             className="bg-teal-600 hover:bg-teal-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
           >
             <DownloadIcon />
-            Download APK
+            APK
           </a>
         )}
       </div>
