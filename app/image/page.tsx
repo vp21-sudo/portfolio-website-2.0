@@ -154,7 +154,7 @@ export default function Component() {
           </div>
           {originalSize !== null && (
             <p className="mt-2 text-sm text-gray-600">
-              Original Size: <strong>{originalSize} KB</strong>
+              Original Size: <strong>{originalSize} MB</strong>
             </p>
           )}
         </div>
@@ -288,7 +288,7 @@ export default function Component() {
           </div>
           {compressedSize !== null && compressedImage && (
             <p className="mt-2 text-sm text-gray-600">
-              Updated Size: <strong>{compressedSize} KB</strong>
+              Updated Size: <strong>{compressedSize} MB</strong>
             </p>
           )}
         </div>

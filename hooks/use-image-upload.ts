@@ -23,8 +23,8 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
   const [compressedImage, setCompressedImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [originalSize, setOriginalSize] = useState<number | null>(null); // Store original image size (KB)
-  const [compressedSize, setCompressedSize] = useState<number | null>(null); // Store compressed image size (KB)
+  const [originalSize, setOriginalSize] = useState<string | null>(null); // Store original image size (KB)
+  const [compressedSize, setCompressedSize] = useState<string | null>(null); // Store compressed image size (KB)
 
   const handleThumbnailClick = useCallback(() => {
     fileInputRef.current?.click();
@@ -35,7 +35,7 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
       const file = event.target.files?.[0];
       if (file) {
         setFileName(file.name);
-        setOriginalSize(Math.round(file.size / 1024)); // Convert size to KB
+        setOriginalSize((file.size / 1024 / 1024).toFixed(2)); // Convert size to MB and round to 2 decimal places
         const url = URL.createObjectURL(file);
         setPreviewUrl(url);
         previewRef.current = url;
@@ -100,10 +100,15 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
       setCompressedImage(`data:image/jpeg;base64,${compressedBase64}`);
 
       // Calculate the compressed size
-      const compressedSizeKB = Math.round(
-        (compressedBase64.length * 3) / 4 / 1024,
-      ); // Base64 size to KB
-      setCompressedSize(compressedSizeKB);
+      const compressedSizeMB = (
+        (compressedBase64.length * 3) /
+        4 /
+        1024 /
+        1024
+      ).toFixed(2);
+
+      // Base64 size to MB
+      setCompressedSize(compressedSizeMB);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
