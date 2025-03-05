@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { motion } from "motion/react";
 
 // Define font
 const popins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
@@ -35,7 +36,7 @@ const projects: ProjectType[] = [
     description:
       "AWS Lambda Image Compressor is a serverless function designed to efficiently reduce image file sizes while maintaining quality. Built using Node.js, it utilizes Sharp for image processing. Event-driven execution and low-cost scalability, this solution enhances performance for applications that rely on image-heavy content.",
     image:
-      "https://sthreepublicproject.s3.ap-south-1.amazonaws.com/lambda-image-compressor.png",
+      "https://sthreepublicproject.s3.ap-south-1.amazonaws.com/image-compressor.png",
     github: "",
     demo: "/image",
     techs: ["AWS Lambda", "Node.js", "Sharp", "Serverless", "Next JS"],
@@ -81,25 +82,36 @@ const projects: ProjectType[] = [
     apk: "https://sthreepublicproject.s3.ap-south-1.amazonaws.com/apk/to-do-app-.0.2.1.apk",
     techs: ["Flutter", "Dart", "SQL-Lite"],
   },
-  {
-    title: "Go-Do",
-    description:
-      "Go-Do is a simple yet purposeful to-do app project designed to explore the power of GoLang while building backend APIs. Beyond just creating another to-do app, this project focuses on learning a new language, leveraging frameworks like Fiber, and comparing Go's concurrency and performance capabilities to JavaScript and TypeScript. It's a hands-on journey into backend development, strengthening skills in API design, server-side logic, and architectural best practices.",
-    image: "",
-    github: "https://github.com/vp21-sudo/go-do-backend",
-    demo: "",
-    techs: ["Golang", "Fiber", "REST"],
-  },
+  // {
+  //   title: "Go-Do",
+  //   description:
+  //     "Go-Do is a simple yet purposeful to-do app project designed to explore the power of GoLang while building backend APIs. Beyond just creating another to-do app, this project focuses on learning a new language, leveraging frameworks like Fiber, and comparing Go's concurrency and performance capabilities to JavaScript and TypeScript. It's a hands-on journey into backend development, strengthening skills in API design, server-side logic, and architectural best practices.",
+  //   image: "",
+  //   github: "https://github.com/vp21-sudo/go-do-backend",
+  //   demo: "",
+  //   techs: ["Golang", "Fiber", "REST"],
+  // },
 ];
 
 const ProjectGrid: React.FC<{
   project: ProjectType;
   onImageClick: (image: string, title: string) => void;
-}> = ({ project, onImageClick }) => {
+  index: number;
+}> = ({ project, onImageClick, index }) => {
   const { title, description, image, github, demo, apk, techs } = project;
 
   return (
-    <div className="flex flex-col dark:bg-slate-800 rounded-lg border-2 gap-2   border-slate-500 p-8 shadow-slate-200 shadow-sm  transition-shadow duration-300">
+    <motion.div
+      className="flex flex-col dark:bg-slate-800 rounded-lg border-2 gap-2   border-slate-500 p-8 shadow-slate-200 shadow-sm  transition-shadow duration-300"
+      initial={{ translateY: 230, opacity: 0 }}
+      whileInView={{ translateY: 0, opacity: 1 }}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+        delay: (index / 2) * 0.15,
+      }}
+      viewport={{ once: true }}
+    >
       {/* Title */}
       <h2 className="text-slate-950 dark:text-slate-50 text-2xl font-bold mb-2">
         {title}
@@ -170,7 +182,7 @@ const ProjectGrid: React.FC<{
           </a>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -191,7 +203,7 @@ const ProjectsSection: React.FC = () => {
     setModalTitle(null);
   };
   return (
-    <div
+    <motion.div
       id="projects"
       className={`${popins.className} min-h-screen bg-slate-100 dark:bg-slate-950 px-4 py-12 md:px-16 lg:px-32`}
     >
@@ -205,6 +217,7 @@ const ProjectsSection: React.FC = () => {
             key={index}
             project={project}
             onImageClick={handleImageClick}
+            index={index}
           />
         ))}
       </div>
@@ -238,7 +251,7 @@ const ProjectsSection: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

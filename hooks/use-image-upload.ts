@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useCallback, useEffect, useRef, useState } from "react";
+import useDebounce from "./use-debounce";
 
 interface UseImageUploadProps {
   onUpload?: (url: string, base64: string) => void;
@@ -11,6 +12,14 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [base64String, setBase64String] = useState<string | null>(null);
+  const [width, setWidth] = useState<number>(300);
+  const debouncedWidth = useDebounce(width, 300);
+  const [height, setHeight] = useState<number>(300);
+  const debouncedHeight = useDebounce(height, 300);
+  const [quality, setQuality] = useState<number>(75);
+  const debouncedQuality = useDebounce(quality, 300);
+  const [format, setFormat] = useState<string>("JPEG");
+
   const [compressedImage, setCompressedImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -68,7 +77,13 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
     try {
       const response = await axios.post(
         "https://y5oe2nr8d2.execute-api.ap-south-1.amazonaws.com/default/image-compressor",
-        { imageBase64: base64String },
+        {
+          imageBase64: base64String,
+          width: debouncedWidth,
+          height: debouncedHeight,
+          quality: debouncedQuality,
+          format,
+        },
         {
           headers: {
             "Content-Type": "application/json",
@@ -98,20 +113,29 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
     } finally {
       setLoading(false);
     }
-  }, [base64String]);
+  }, [base64String, debouncedHeight, debouncedWidth, debouncedQuality, format]);
 
   useEffect(() => {
+    compressImage();
     return () => {
       if (previewRef.current) {
         URL.revokeObjectURL(previewRef.current);
       }
     };
-  }, []);
+  }, [compressImage]);
 
   return {
     previewUrl,
     fileName,
     base64String,
+    height,
+    setHeight,
+    width,
+    setWidth,
+    quality,
+    setQuality,
+    format,
+    setFormat,
     compressedImage,
     originalSize,
     compressedSize,
@@ -121,6 +145,5 @@ export function useImageUpload({ onUpload }: UseImageUploadProps = {}) {
     handleThumbnailClick,
     handleFileChange,
     handleRemove,
-    compressImage,
   };
 }

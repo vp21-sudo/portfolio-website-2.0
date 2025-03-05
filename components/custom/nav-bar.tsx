@@ -52,7 +52,7 @@ const TopNav = () => {
       {/* Top Navigation */}
       <div
         className={`z-50 fixed md:w-full right-1 md:right-0  md:flex justify-center items-center transition-all ease-in-out duration-300 ${
-          fullNav ? "mt-0 h-16 pt-4" : "mt-4 h-20"
+          fullNav ? "mt-0 h-16 pt-4" : "mt-0 h-10"
         } ${theme === "dark" ? "text-white" : " text-gray-900"}`}
       >
         <motion.div

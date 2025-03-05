@@ -19,7 +19,7 @@ const LandingSection = () => {
   return (
     <div
       id="home"
-      className={`${popins.className} w-full h-screen flex flex-col justify-center items-center text-stone-50`}
+      className={`${popins.className} w-full h-[92vh] flex flex-col justify-center items-center text-stone-50`}
       // style={{
       //   backgroundImage: "url('/bg1.jpg')",
       //   backgroundSize: "cover",

@@ -81,7 +81,7 @@ const ChatSection = () => {
     <div
       className={`  fixed  w-14 dark:bg-slate-950 bg-slate-100 dark:text-gray-200 text-gray-900 shadow-lg transition-all ease-in-out duration-200 z-30 ${
         open
-          ? " h-[70vh] md:h-96 w-[90vw] md:w-72 rounded-lg rounded-b-none right-5 md:right-20 bottom-24 md:bottom-20"
+          ? " h-[70vh] md:h-[60vh] w-[90vw] md:w-96 rounded-lg rounded-b-none right-5 md:right-20 bottom-24 md:bottom-20"
           : "h-14 rounded-full right-3 bottom-10 md:bottom-10 md:right-16 "
       }`}
     >
