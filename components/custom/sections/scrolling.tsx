@@ -31,7 +31,7 @@ const ScrollingSection = () => {
     <div
       className={
         popins.className +
-        " h-20 md:h-32 bg-slate-300 dark:bg-slate-800 flex flex-col gap-2 text-4xl md:text-6xl justify-center items-center w-full overflow-hidden"
+        " h-20 md:h-32 bg-slate-300 dark:bg-slate-800 flex flex-col gap-2 text-4xl md:text-6xl justify-center items-center w-full overflow-hidden grp"
       }
     >
       <div className="w-full flex text-slate-950 dark:text-slate-50 font-bold gap-10 animate-scroll">

@@ -15,8 +15,8 @@ const Page = () => {
       <ChatSection />
       <LandingSection />
       <ScrollingSection />
-      <ProjectsSection />
       <Exp />
+      <ProjectsSection />
       <Edu />
       <Contact />
       <Footer />

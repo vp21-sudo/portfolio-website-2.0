@@ -102,7 +102,7 @@ const ProjectGrid: React.FC<{
 
   return (
     <motion.div
-      className="flex flex-col dark:bg-slate-800 rounded-lg border-2 gap-2   border-slate-500 p-8 shadow-slate-200 shadow-sm  transition-shadow duration-300"
+      className="flex flex-col bg-slate-100 dark:bg-slate-800 rounded-sm gap-2 shadow-slate-950 dark:shadow-slate-50 shadow-sm  transition-shadow duration-300"
       initial={{ translateY: 230, opacity: 0 }}
       whileInView={{ translateY: 0, opacity: 1 }}
       transition={{
@@ -112,11 +112,6 @@ const ProjectGrid: React.FC<{
       }}
       viewport={{ once: true }}
     >
-      {/* Title */}
-      <h2 className="text-slate-950 dark:text-slate-50 text-2xl font-bold mb-2">
-        {title}
-      </h2>
-
       {/* Image */}
       {image && (
         <div
@@ -126,61 +121,66 @@ const ProjectGrid: React.FC<{
           <Image
             src={image}
             alt={`${title} image`}
-            width={800}
+            width={1200}
             height={800}
-            className="rounded-lg border-2 border-slate-500 object-contain "
+            className=" h-52 w-full rounded-sm object-cover "
           />
         </div>
       )}
+      <div className=" p-4">
+        {/* Title */}
+        <h2 className="text-slate-950 dark:text-slate-50 text-2xl font-bold mb-2">
+          {title}
+        </h2>
+        {/* Description */}
+        <p className="text-slate-500 dark:text-slate-200 z-10 text-md md:text-lg mb-2 line-clamp-4">
+          {description}
+        </p>
 
-      {/* Description */}
-      <p className="text-slate-500 dark:text-slate-200 z-10 text-md md:text-lg md:py-8 mb-2 line-clamp-4">
-        {description}
-      </p>
+        {/* Technologies */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {techs.map((tech, index) => (
+            <span
+              key={index}
+              className=" bg-slate-200 dark:bg-slate-700 text-xs md:text-sm text-slate-700 dark:text-slate-50 px-2 py-1 rounded"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
 
-      {/* Technologies */}
-      <div className="flex flex-wrap gap-2 mb-4">
-        {techs.map((tech, index) => (
-          <span
-            key={index}
-            className=" bg-slate-200 dark:bg-slate-700 text-xs md:text-sm text-slate-700 dark:text-slate-50 px-2 py-1 rounded"
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-
-      {/* Buttons */}
-      <div className="flex gap-3 mt-auto z-20">
-        {github && (
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-blue-700 hover:bg-blue-600 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
-          >
-            <Github />
-            GitHub
-          </a>
-        )}
-        {demo && (
-          <Link
-            href={demo}
-            className="bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
-          >
-            <Radio />
-            Live Demo
-          </Link>
-        )}
-        {apk && (
-          <a
-            href={apk}
-            className="bg-teal-600 hover:bg-teal-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
-          >
-            <DownloadIcon />
-            APK
-          </a>
-        )}
+        {/* Buttons */}
+        <div className="flex gap-3 mt-auto z-20">
+          {github && (
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-700 hover:bg-blue-600 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+            >
+              <Github />
+              GitHub
+            </a>
+          )}
+          {demo && (
+            <Link
+              href={demo}
+              className="bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+            >
+              <Radio />
+              Live Demo
+            </Link>
+          )}
+          {apk && (
+            <a
+              href={apk}
+              className="bg-teal-600 hover:bg-teal-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+            >
+              <DownloadIcon />
+              APK
+            </a>
+          )}
+        </div>
       </div>
     </motion.div>
   );
@@ -205,7 +205,7 @@ const ProjectsSection: React.FC = () => {
   return (
     <motion.div
       id="projects"
-      className={`${popins.className} min-h-screen bg-slate-100 dark:bg-slate-950 px-4 py-12 md:px-16 lg:px-32`}
+      className={`${popins.className} min-h-screen bg-blue-100  dark:bg-slate-950 px-4 py-12 md:px-16 lg:px-32`}
     >
       <h1 className="dark:text-slate-50 text-slate-950 text-4xl font-bold mt-12 mb-12">
         Projects

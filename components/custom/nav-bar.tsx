@@ -1,51 +1,14 @@
 "use client";
-import {
-  Home,
-  Kanban,
-  Phone,
-  Menu,
-  X,
-  SquareTerminal,
-  Sun,
-  Moon,
-} from "lucide-react";
-import { useScroll } from "motion/react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { useTheme } from "@/context/theme"; // Adjust the import path based on your project
 
 const TopNav = () => {
-  const [fullNav, setFullNav] = useState(false);
-  const [hash, setHash] = useState("");
+  const fullNav = true;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
   const { theme, toggleTheme } = useTheme();
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (progress) => {
-      setFullNav(progress > 0.12);
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      setHash(window.location.hash);
-    };
-
-    // Listen for history changes, including hash changes
-    window.addEventListener("popstate", handleHashChange);
-
-    // Set the initial hash
-    setHash(window.location.hash);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener("popstate", handleHashChange);
-    };
-  }, []);
 
   return (
     <>
@@ -56,10 +19,10 @@ const TopNav = () => {
         } ${theme === "dark" ? "text-white" : " text-gray-900"}`}
       >
         <motion.div
-          className={`px-6 py-4 flex items-center bg-transparent md:bg-slate-200 md:dark:bg-slate-800 transition-all ease-in-out duration-500 ${
+          className={` px-4 flex items-center bg-transparent backdrop-blur-lg transition-all ease-in-out duration-500 ${
             fullNav
-              ? "w-full py-4 px-10 justify-between"
-              : `w-2/5 rounded-full py-4 md:translate-y-40 justify-between`
+              ? " container mt-5 rounded-full w-2/3 py-4 px-10 justify-between"
+              : `w-2/6 rounded-full py-4 md:translate-y-40 justify-between`
           } ${theme === "dark" ? "bg-gray-800" : "bg-slate-200"}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -69,11 +32,9 @@ const TopNav = () => {
             <Image
               src="/logo.jpeg"
               alt="logo"
-              width={60}
+              width={50}
               height={50}
-              className={
-                (!fullNav ? "w-0" : "w-18") + " hidden md:flex rounded-full"
-              }
+              className={" w-18 hidden md:flex rounded-full"}
             />
           </a>
 
@@ -96,115 +57,57 @@ const TopNav = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex w-2/3 justify-end items-center gap-10">
-            <a
-              href={"#home"}
-              className={`group flex justify-center items-center gap-2 text-xl transition-transform duration-100 ${theme === "dark" ? "hover:text-yellow-300" : "hover:text-blue-600"}`}
-            >
-              <Home
-                size={18}
-                className={`group-hover:scale-125 transition-transform duration-200 ${
-                  (hash === "#home" || hash === "") &&
-                  (theme === "dark" ? "text-yellow-300" : "text-blue-600")
-                }`}
-              />
-              <span
-                className={`relative font-bold flex ${
-                  (hash === "#home" || hash === "") &&
-                  (theme === "dark" ? "text-yellow-300" : "text-blue-600")
-                }`}
+            {/* Social Media Links */}
+            <div className="flex gap-6">
+              <a
+                href="https://github.com/vp21-sudo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-teal-400 dark:hover:text-yellow-300 transition-transform hover:scale-110"
               >
-                Home
-                <span
-                  className={`absolute bottom-0 w-0 h-[0.1rem] ${
-                    theme === "dark" ? "bg-yellow-300" : "bg-blue-600"
-                  } group-hover:w-full transition-all ease-in-out duration-200 ${
-                    (hash === "#home" || hash === "") && "w-full"
-                  }`}
-                ></span>
-              </span>
-            </a>
-            {/* Other Links */}
-            <a
-              href={"#projects"}
-              className={`group flex justify-center items-center gap-2 text-xl transition-transform duration-100 ${theme === "dark" ? "hover:text-yellow-300" : "hover:text-blue-600"}`}
-            >
-              <Kanban
-                size={18}
-                className={`group-hover:-rotate-90 transition-transform duration-200 ${
-                  hash === "#projects" &&
-                  (theme === "dark" ? "text-yellow-300" : "text-blue-600")
-                }`}
-              />
-              <span
-                className={`relative font-bold flex ${
-                  hash === "#projects" &&
-                  (theme === "dark" ? "text-yellow-300" : "text-blue-600")
-                }`}
+                <Image
+                  src={"/github.png"}
+                  alt="Github"
+                  width={30}
+                  height={30}
+                  className=" bg-slate-950 p-1 rounded-full"
+                />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sudovp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-teal-400 pt-1 dark:hover:text-yellow-300 transition-transform hover:scale-110"
               >
-                Projects
-                <span
-                  className={`absolute bottom-0 w-0 h-[0.1rem] ${
-                    theme === "dark" ? "bg-yellow-300" : "bg-blue-600"
-                  } group-hover:w-full transition-all ease-in-out duration-200 ${
-                    hash === "#projects" && "w-full"
-                  }`}
-                ></span>
-              </span>
-            </a>
-            <a
-              href={"#about"}
-              className={`group flex justify-center items-center gap-2 text-xl transition-transform duration-300 ${theme === "dark" ? "hover:text-yellow-300" : "hover:text-blue-600"}`}
-            >
-              <SquareTerminal
-                size={18}
-                className={`group-hover:scale-125 transition-transform duration-200 ${
-                  hash === "#about" &&
-                  (theme === "dark" ? "text-yellow-300" : "text-blue-600")
-                }`}
-              />
-              <span
-                className={`relative font-bold flex ${
-                  hash === "#about" &&
-                  (theme === "dark" ? "text-yellow-300" : "text-blue-600")
-                }`}
+                <Image
+                  src={"/linkedin.png"}
+                  alt="linkedin"
+                  width={30}
+                  height={30}
+                />
+              </a>
+              <a
+                href="https://www.instagram.com/vishwa_prasad_1/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-teal-400 dark:hover:text-yellow-300 transition-transform hover:scale-110"
               >
-                About
-                <span
-                  className={`absolute bottom-0 w-0 h-[0.1rem] ${
-                    theme === "dark" ? "bg-yellow-300" : "bg-blue-600"
-                  } group-hover:w-full transition-all ease-in-out duration-200 ${
-                    hash === "#about" && "w-full"
-                  }`}
-                ></span>
-              </span>
-            </a>
-            <a
-              href={"#contact"}
-              className={`group flex justify-center items-center gap-2 text-xl transition-transform duration-300 ${theme === "dark" ? "hover:text-yellow-300" : "hover:text-blue-600"}`}
-            >
-              <Phone
-                size={18}
-                className={` rotate-90 group-hover:rotate-0 transition-transform duration-200 ${
-                  hash === "#contact" &&
-                  (theme === "dark" ? "text-yellow-300 " : "text-blue-600")
-                }`}
-              />
-              <span
-                className={`relative font-bold flex ${
-                  hash === "#contact" &&
-                  (theme === "dark" ? "text-yellow-300" : "text-blue-600")
-                }`}
+                <Image
+                  src={"/instagram.png"}
+                  alt="Instagram"
+                  width={30}
+                  height={30}
+                />
+              </a>
+              <a
+                href="mailto:vishwaprasad11@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-teal-400 dark:hover:text-yellow-300 transition-transform hover:scale-110"
               >
-                Contact
-                <span
-                  className={`absolute bottom-0 w-0 h-[0.1rem] ${
-                    theme === "dark" ? "bg-yellow-300" : "bg-blue-600"
-                  } group-hover:w-full transition-all ease-in-out duration-200 ${
-                    hash === "#contact" && "w-full"
-                  }`}
-                ></span>
-              </span>
-            </a>
+                <Image src={"/gmail.png"} alt="Gmail" width={30} height={30} />
+              </a>
+            </div>
             {/* Theme Toggle Button */}
             <div className="flex justify-between items-center">
               <button
@@ -241,41 +144,57 @@ const TopNav = () => {
               alt="logo"
               width={40}
               height={40}
-              className="rounded-full mb-6"
+              className=" rounded-full mb-6"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <nav className="relative flex items-center flex-col gap-6">
               <a
-                href={"#home"}
-                className="flex items-center gap-2 text-xl mt-4"
-                onClick={() => setIsMobileMenuOpen(false)}
+                href="https://github.com/vp21-sudo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-teal-400 dark:hover:text-yellow-300 transition-transform hover:scale-110"
               >
-                <Home size={20} />
-                Home
+                <Image
+                  src={"/github.png"}
+                  alt="Github"
+                  width={30}
+                  height={30}
+                  className=" bg-slate-950 rounded-full p-[0.1vh]"
+                />
               </a>
               <a
-                href={"#projects"}
-                className="flex items-center gap-2 text-xl"
-                onClick={() => setIsMobileMenuOpen(false)}
+                href="https://www.linkedin.com/in/sudovp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-teal-400 pt-1 dark:hover:text-yellow-300 transition-transform hover:scale-110"
               >
-                <Kanban size={20} />
-                Projects
+                <Image
+                  src={"/linkedin.png"}
+                  alt="linkedin"
+                  width={30}
+                  height={30}
+                />
               </a>
               <a
-                href={"#about"}
-                className="flex items-center gap-2 text-xl"
-                onClick={() => setIsMobileMenuOpen(false)}
+                href="https://www.instagram.com/vishwa_prasad_1/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-teal-400 dark:hover:text-yellow-300 transition-transform hover:scale-110"
               >
-                <SquareTerminal size={20} />
-                About
+                <Image
+                  src={"/instagram.png"}
+                  alt="Instagram"
+                  width={30}
+                  height={30}
+                />
               </a>
               <a
-                href={"#contact"}
-                className="flex items-center gap-2 text-xl"
-                onClick={() => setIsMobileMenuOpen(false)}
+                href="mailto:vishwaprasad11@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-teal-400 dark:hover:text-yellow-300 transition-transform hover:scale-110"
               >
-                <Phone size={20} />
-                Contact
+                <Image src={"/gmail.png"} alt="Gmail" width={30} height={30} />
               </a>
               {/* Theme Toggle Button */}
               <div className="flex justify-between items-center">
