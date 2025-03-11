@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 // Define font
 const popins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
@@ -95,14 +95,23 @@ const projects: ProjectType[] = [
 
 const ProjectGrid: React.FC<{
   project: ProjectType;
-  onImageClick: (image: string, title: string) => void;
+  onImageClick: (
+    title: string,
+    description: string,
+    techs: string[],
+    index: number,
+    image?: string,
+    github?: string,
+    demo?: string,
+    apk?: string,
+  ) => void;
   index: number;
 }> = ({ project, onImageClick, index }) => {
   const { title, description, image, github, demo, apk, techs } = project;
 
   return (
     <motion.div
-      className="flex flex-col bg-slate-100 dark:bg-slate-800 rounded-sm gap-2 shadow-slate-950 dark:shadow-slate-50 shadow-sm  transition-shadow duration-300"
+      className="flex flex-col bg-slate-100 dark:bg-slate-800 rounded-sm gap-2 shadow-slate-950 dark:shadow-slate-50 shadow-sm  transition-shadow duration-300 cursor-pointer"
       initial={{ translateY: 230, opacity: 0 }}
       whileInView={{ translateY: 0, opacity: 1 }}
       transition={{
@@ -111,34 +120,46 @@ const ProjectGrid: React.FC<{
         delay: (index / 2) * 0.15,
       }}
       viewport={{ once: true }}
+      onClick={() =>
+        onImageClick(title, description, techs, index, image, github, demo, apk)
+      }
     >
       {/* Image */}
       {image && (
-        <div
+        <motion.div
           className={"w-full h-40 mb-4 relative " + image && " cursor-pointer"}
-          onClick={() => onImageClick(image, title)}
+          layoutId={`project-image-${index}`}
         >
           <Image
             src={image}
             alt={`${title} image`}
             width={1200}
             height={800}
-            className=" h-52 w-full rounded-sm object-cover "
+            className=" h-62 w-full rounded-sm object-cover "
           />
-        </div>
+        </motion.div>
       )}
       <div className=" p-4">
         {/* Title */}
-        <h2 className="text-slate-950 dark:text-slate-50 text-2xl font-bold mb-2">
+        <motion.h2
+          className="text-slate-950 dark:text-slate-50 text-2xl font-bold mb-2"
+          layoutId={`title-${index}`}
+        >
           {title}
-        </h2>
+        </motion.h2>
         {/* Description */}
-        <p className="text-slate-500 dark:text-slate-200 z-10 text-md md:text-lg mb-2 line-clamp-4">
+        <motion.p
+          className="text-slate-500 dark:text-slate-200 z-10 text-md md:text-lg mb-2 line-clamp-4"
+          layoutId={`description-${index}`}
+        >
           {description}
-        </p>
+        </motion.p>
 
         {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        <motion.div
+          className="flex flex-wrap gap-2 mb-4"
+          layoutId={`techs-${index}`}
+        >
           {techs.map((tech, index) => (
             <span
               key={index}
@@ -147,12 +168,16 @@ const ProjectGrid: React.FC<{
               {tech}
             </span>
           ))}
-        </div>
+        </motion.div>
 
         {/* Buttons */}
-        <div className="flex gap-3 mt-auto z-20">
+        <motion.div
+          className="flex gap-3 mt-auto z-20"
+          layoutId={`btns-${index}`}
+        >
           {github && (
             <a
+              onClick={(e) => e.stopPropagation()}
               href={github}
               target="_blank"
               rel="noopener noreferrer"
@@ -164,6 +189,7 @@ const ProjectGrid: React.FC<{
           )}
           {demo && (
             <Link
+              onClick={(e) => e.stopPropagation()}
               href={demo}
               className="bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
             >
@@ -173,6 +199,7 @@ const ProjectGrid: React.FC<{
           )}
           {apk && (
             <a
+              onClick={(e) => e.stopPropagation()}
               href={apk}
               className="bg-teal-600 hover:bg-teal-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
             >
@@ -180,7 +207,7 @@ const ProjectGrid: React.FC<{
               APK
             </a>
           )}
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -188,19 +215,46 @@ const ProjectGrid: React.FC<{
 
 const ProjectsSection: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalImage, setModalImage] = useState<string | null>(null);
+  const [modalImage, setModalImage] = useState<string | undefined>(undefined);
   const [modalTitle, setModalTitle] = useState<string | null>(null);
+  const [modalDescription, setModalDescription] = useState<string | null>(null);
+  const [modalTechs, setModalTechs] = useState<string[] | []>([]);
+  const [modalGithub, setModalGithub] = useState<string | undefined>(undefined);
+  const [modalDemo, setModalDemo] = useState<string | undefined>(undefined);
+  const [modalApk, setModalApk] = useState<string | undefined>(undefined);
 
-  const handleImageClick = (image: string, title: string) => {
+  const [modalIndex, setModalIndex] = useState<number | null>(null);
+
+  const handleImageClick = (
+    title: string,
+    description: string,
+    techs: string[],
+    index: number,
+    image?: string,
+    github?: string,
+    demo?: string,
+    apk?: string,
+  ) => {
     setModalImage(image);
     setModalTitle(title);
+    setModalDescription(description);
+    setModalTechs(techs);
+    setModalGithub(github);
+    setModalDemo(demo);
+    setModalApk(apk);
+    setModalIndex(index);
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setModalImage(null);
-    setModalTitle(null);
+    setTimeout(() => {
+      setModalDescription(null);
+      setModalImage(undefined);
+      setModalTitle(null);
+      setModalTechs([]);
+      setModalIndex(null);
+    }, 200);
   };
   return (
     <motion.div
@@ -222,35 +276,96 @@ const ProjectsSection: React.FC = () => {
         ))}
       </div>
       {/* Modal */}
-      {isModalOpen && modalImage && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-          onClick={handleCloseModal}
-        >
+      <AnimatePresence>
+        {isModalOpen && (
           <div
-            className="relative w-10/12 md:w-4/5 lg:w-3/4 xl:w-2/3 bg-white dark:bg-slate-800 rounded-lg p-6"
-            onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside
+            className="fixed inset-0 bg-transparent backdrop-blur-lg flex items-center justify-center z-50"
+            onClick={handleCloseModal}
           >
-            <button
-              onClick={handleCloseModal}
-              className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 text-xl font-bold"
+            <div
+              className="relative w-10/12 md:w-4/5 lg:w-4/5 xl:w-3/4 md:px-24 lg:px-36  rounded-lg p-6"
+              onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside
             >
-              &times;
-            </button>
-            <h2 className="text-center text-2xl font-bold text-slate-800 dark:text-slate-50 mb-6">
-              {modalTitle}
-            </h2>
-            <div className="w-full h-[20vh] md:h-[70vh] relative">
-              <Image
-                src={modalImage}
-                alt={modalTitle || "Modal Image"}
-                layout="fill"
-                className="object-contain rounded-lg"
-              />
+              <button
+                onClick={handleCloseModal}
+                className="absolute top-0 lg:top-4 right-4 text-gray-700 z-50 dark:text-gray-300 text-xl font-bold"
+              >
+                &times;
+              </button>
+              <motion.h2
+                className="text-center text-md lg:text-2xl font-bold text-slate-800 dark:text-slate-50 mb-2 lg:mb-2"
+                layoutId={`title-${modalIndex}`}
+              >
+                {modalTitle}
+              </motion.h2>
+              {modalImage && (
+                <motion.div className="w-full h-[20vh] md:h-[60vh] relative">
+                  <motion.img
+                    src={modalImage}
+                    alt={modalTitle || "Modal Image"}
+                    className=" w-full h-full object-contain rounded-lg"
+                    layoutId={`project-image-${modalIndex}`}
+                  />
+                </motion.div>
+              )}
+              <motion.p
+                className=" bg-slate-50 rounded-lg p-2 md:px-3 dark:bg-slate-950 bg-opacity-60 text-left text-sm lg:text-lg  w-full text-slate-800 dark:text-slate-50 mt-2 lg:mt-6"
+                layoutId={`description-${modalIndex}`}
+              >
+                {modalDescription}
+              </motion.p>
+              {/* Technologies */}
+              <motion.div
+                className=" mt-2  flex flex-wrap gap-2 mb-4"
+                layoutId={`techs-${modalIndex}`}
+              >
+                {modalTechs.map((tech, index) => (
+                  <span
+                    key={index}
+                    className=" bg-slate-200 dark:bg-slate-700 text-xs md:text-sm text-slate-700 dark:text-slate-50 px-2 py-1 rounded"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </motion.div>
+              <motion.div
+                className="flex gap-3 mt-auto z-20 "
+                layoutId={`btns-${modalIndex}`}
+              >
+                {modalGithub && (
+                  <a
+                    href={modalGithub}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-blue-700 hover:bg-blue-600 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+                  >
+                    <Github />
+                    GitHub
+                  </a>
+                )}
+                {modalDemo && (
+                  <Link
+                    href={modalDemo}
+                    className="bg-green-600 hover:bg-green-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+                  >
+                    <Radio />
+                    Live Demo
+                  </Link>
+                )}
+                {modalApk && (
+                  <a
+                    href={modalApk}
+                    className="bg-teal-600 hover:bg-teal-500 transition-all ease-in-out duration-200 text-white text-xs md:text-sm px-3 py-2 rounded font-bold flex justify-center items-center gap-3"
+                  >
+                    <DownloadIcon />
+                    APK
+                  </a>
+                )}
+              </motion.div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
